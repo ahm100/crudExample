@@ -19,5 +19,23 @@ namespace Vehicle.Infrastructure.Persistence
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => new { c.FirstName, c.LastName, c.DateOfBirth })
+                .IsUnique();
+
+            modelBuilder.Entity<Customer>()
+                .HasIndex(c => c.Email)
+                .IsUnique();
+
+            // Configure column lengths
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.PhoneNumber)
+                .HasMaxLength(15)
+                .IsRequired();
+        }
     }
 }

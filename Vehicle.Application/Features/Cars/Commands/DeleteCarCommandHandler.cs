@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vehicle.Application.Contracts.Persistence;
+using Vehicle.Application.Features.Customers.Commands;
 using Vehicle.Domain.Entities;
 
 namespace Vehicle.Application.Features.Cars.Commands
