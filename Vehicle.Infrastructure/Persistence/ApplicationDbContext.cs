@@ -17,6 +17,7 @@ namespace Vehicle.Infrastructure.Persistence
         public DbSet<Boat> Boats { get; set; }
         public DbSet<Bus> Bus { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
     }
 }

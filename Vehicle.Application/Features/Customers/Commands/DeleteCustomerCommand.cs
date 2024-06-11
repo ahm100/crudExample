@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Vehicle.Application.Features.Customers.Commands
 {
-    public class DeleteCarCommand : IRequest
+    public class DeleteCustomerCommand : IRequest
     {
         public int Id { get; set; }
 
