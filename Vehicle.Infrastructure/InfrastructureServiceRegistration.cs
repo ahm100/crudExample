@@ -23,6 +23,7 @@ namespace Vehicle.Infrastructure
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IBusRepository, BusRepository>();
             services.AddScoped<IBoatRepository, BoatRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 
             return services;
