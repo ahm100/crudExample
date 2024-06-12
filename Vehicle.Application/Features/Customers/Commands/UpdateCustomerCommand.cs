@@ -2,7 +2,7 @@
 
 namespace Vehicle.Application.Features.Customers.Commands
 {
-    public class UpdateCustomerCommand : IRequest<int>
+    public class UpdateCustomerCommand : IRequest<Unit>
     {
         public int Id { get; }
         public string FirstName { get; set; }

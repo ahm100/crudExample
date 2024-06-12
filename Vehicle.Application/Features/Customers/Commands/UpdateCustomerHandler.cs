@@ -12,27 +12,31 @@ using Microsoft.Extensions.Logging;
 using Vehicle.Application.Features.Cars.Commands;
 using Vehicle.Application.Features.Cars.Queries;
 using Vehicle.Application.Common.Exceptions;
+using System.Runtime.InteropServices;
+using AutoMapper;
 
 namespace CrudTest.Application.Handlers
 {
-    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, int>
+    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand>
     {
         private readonly ICustomerRepository _context;
         private readonly IValidator<Customer> _validator;
-        private readonly ILogger<CreateCustomerHandler> _logger;
+        private readonly ILogger<UpdateCustomerHandler> _logger;
+        private readonly IMapper _mapper;
 
-        public UpdateCustomerHandler(ICustomerRepository context, IValidator<Customer> validator, ILogger<CreateCustomerHandler> logger)
+        public UpdateCustomerHandler(ICustomerRepository context, IValidator<Customer> validator, IMapper mapper, ILogger<UpdateCustomerHandler> logger)
         {
             _context = context;
             _validator = validator;
+            _mapper = mapper;
             _logger = logger;
         }
 
-        public async Task<int> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = await _context.GetByIdAsync(request.Id);
+            var customerToUpdate = await _context.GetByIdAsync(request.Id);
 
-            if (customer == null)
+            if (customerToUpdate == null)
             {
                 throw new NotFoundException(nameof(Customer), request.Id);
             }
@@ -51,19 +55,21 @@ namespace CrudTest.Application.Handlers
                 throw new ValidationException("Email must be unique");
             }
 
-           
-            customer.FirstName = request.FirstName;
-            customer.LastName = request.LastName;
-            customer.DateOfBirth = request.DateOfBirth;
-            customer.PhoneNumber = numberProto.NationalNumber.ToString();
-            customer.Email = request.Email;
-            customer.BankAccountNumber = request.BankAccountNumber;
+            //without mapper:
+            //customer.FirstName = request.FirstName;
+            //customer.LastName = request.LastName;
+            //customer.DateOfBirth = request.DateOfBirth;
+            //customer.PhoneNumber = numberProto.NationalNumber.ToString();
+            //customer.Email = request.Email;
+            //customer.BankAccountNumber = request.BankAccountNumber;
 
-          
-                       
-            var result = await _context.AddAsync(customer);
-            _logger.LogInformation($"{result.Id}");
-            return result.Id;
+            //with automapper:
+            _mapper.Map(request, customerToUpdate, typeof(UpdateCustomerCommand), typeof(Customer));
+
+            await _context.UpdateAsync(customerToUpdate);
+            _logger.LogInformation($"{request.Id}");
+
+            return Unit.Value;
         }
     }
 }
