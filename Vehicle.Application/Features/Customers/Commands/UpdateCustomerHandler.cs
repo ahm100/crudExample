@@ -15,7 +15,7 @@ using Vehicle.Application.Common.Exceptions;
 
 namespace CrudTest.Application.Handlers
 {
-    public class UpdateCustomerHandler : IRequestHandler<CreateCustomerCommand, int>
+    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, int>
     {
         private readonly ICustomerRepository _context;
         private readonly IValidator<Customer> _validator;
