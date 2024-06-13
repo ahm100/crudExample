@@ -13,12 +13,12 @@ using Vehicle.Domain.Entities.Concrete;
 using Microsoft.Extensions.Logging;
 using Vehicle.Application.Contracts.Persistence;
 
-namespace Vehicle.Application.Features.Customers.TestCustomerCrud
+namespace TestProject
 {
-    public class CreateCustomerHandlerTests
+    public class CrudCustomerTests
     {
         [Fact]
-        public async Task Handle_ValidCustomer_ReturnsCustomerId()
+        public async Task CreateCustomer()
         {
             // Arrange
             var validatorMock = new Mock<IValidator<Customer>>();
@@ -43,11 +43,11 @@ namespace Vehicle.Application.Features.Customers.TestCustomerCrud
 
             var command = new CreateCustomerCommand
             {
-                FirstName = "John",
-                LastName = "Doe",
+                FirstName = "mah",
+                LastName = "hasti",
                 DateOfBirth = new DateTime(1990, 1, 1),
-                PhoneNumber = "+1234567890",
-                Email = "john.doe@example.com",
+                PhoneNumber = "+1234567893",
+                Email = "a@example.com",
                 BankAccountNumber = "123456789"
             };
 
