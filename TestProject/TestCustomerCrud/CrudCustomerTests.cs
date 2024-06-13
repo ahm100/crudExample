@@ -45,13 +45,13 @@ namespace TestProject
             {
                 FirstName = "mah",
                 LastName = "hasti",
-                DateOfBirth = new DateTime(1990, 1, 1),
+                DateOfBirth = new DateTime(2023, 1, 1),
                 PhoneNumber = "+1234567893",
                 Email = "a@example.com",
                 BankAccountNumber = "123456789"
             };
 
-            
+
             // Act
             var result = await handler.Handle(command, CancellationToken.None);
 

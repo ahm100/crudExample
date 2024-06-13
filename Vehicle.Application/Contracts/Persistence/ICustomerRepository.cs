@@ -10,7 +10,7 @@ namespace Vehicle.Application.Contracts.Persistence
 {
     public interface ICustomerRepository : IAsyncRepository<Customer>
     {
-        Task<bool> CheckUniqueness(string firstName, string lastName,DateTime dateOfBirth);
-        Task<bool> CheckUniquenessBYEmail(string email);
+        Task<Customer?> findWithFLD(string firstName, string lastName,DateTime dateOfBirth);
+        Task<Customer?> findBYEmail(string email);
     }
 }

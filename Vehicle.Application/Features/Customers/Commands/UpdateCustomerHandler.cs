@@ -52,7 +52,7 @@ namespace CrudTest.Application.Handlers
 
             if (request.Email != customerToUpdate.Email)
             {
-                if (!await _context.CheckUniquenessBYEmail(request.Email))
+                if (await _context.findBYEmail(request.Email) != null)
                 {
                     throw new ValidationException("Email must be unique");
                 }

@@ -17,19 +17,19 @@ namespace Vehicle.Infrastructure.Repositories
         {
         }
 
-        public async Task<bool> CheckUniqueness(string firstName, string lastName, DateTime dateOfBirth)
+        public  Task<Customer?> findWithFLD(string firstName, string lastName, DateTime dateOfBirth)
         {
             var result =  _dbContext.Customers
-                .Any(c => c.FirstName == firstName && c.LastName == lastName && c.DateOfBirth == dateOfBirth);
-            return !result;
+                .FirstOrDefaultAsync(c => c.FirstName == firstName && c.LastName == lastName && c.DateOfBirth == dateOfBirth);
+            return result;
 
         }
 
-        public async Task<bool> CheckUniquenessBYEmail(string email)
+        public async Task<Customer?> findBYEmail(string email)
         {
-            var result = _dbContext.Customers
-               .Any(c => c.Email == email);
-            return !result;
+            var result = await _dbContext.Customers
+               .FirstOrDefaultAsync(c => c.Email == email);
+            return result;
         }
 
         

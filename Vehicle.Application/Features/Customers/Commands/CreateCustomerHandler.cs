@@ -49,11 +49,11 @@ namespace CrudTest.Application.Handlers
             }
 
             // Uniqueness checks
-            if (!await _context.CheckUniqueness(customer.FirstName, customer.LastName, customer.DateOfBirth))
+            if (await _context.findWithFLD(customer.FirstName, customer.LastName, customer.DateOfBirth)!= null)
             {
                 throw new ValidationException("Customer already exists.");
             }
-            if (!await _context.CheckUniquenessBYEmail(customer.Email))
+            if (await _context.findBYEmail(customer.Email)!= null)
             {
                 throw new ValidationException("Email already exists.");
             }
