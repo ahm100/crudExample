@@ -9,7 +9,7 @@ using Vehicle.Application.Contracts.Persistence;
 
 namespace Vehicle.Application.Features.Cars.Queries
 {
-    public class ListCarByColorQueryHandler : IRequestHandler<ListCarByColorQuery, List<CarVM>>
+    public class ListCarByColorQueryHandler : IRequestHandler<ListCustomerQuery, List<CarVM>>
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Vehicle.Application.Features.Cars.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<CarVM>> Handle(ListCarByColorQuery request, CancellationToken cancellationToken)
+        public async Task<List<CarVM>> Handle(ListCustomerQuery request, CancellationToken cancellationToken)
         {
             var carList = await _carRepository.ListCarByColor(request.Color);
             return _mapper.Map<List<CarVM>>(carList);

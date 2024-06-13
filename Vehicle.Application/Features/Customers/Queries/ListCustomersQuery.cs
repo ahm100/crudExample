@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Vehicle.Application.Features.Customers.Queries
 {
-    internal class ListCustomersQuery : IRequest<List<CustomerVM>>
+    public class ListCustomersQuery : IRequest<List<CustomerVM>>
     {
        
     }

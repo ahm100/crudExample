@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Vehicle.Application.Features.Cars.Queries
 {
-    public class ListCarByColorQuery : IRequest<List<CarVM>>
+    public class ListCustomerQuery : IRequest<List<CarVM>>
     {
         public string Color { get; set; }
-        public ListCarByColorQuery(string colorCar)
+        public ListCustomerQuery(string colorCar)
         {
             Color = colorCar;
         }

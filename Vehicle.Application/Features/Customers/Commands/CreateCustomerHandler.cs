@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using FluentValidation;
-//using CrudTest.Application.Common.Interfaces;
-//using CrudTest.Domain.Entities;
 using PhoneNumbers;
-//using CrudTest.Domain.Entities;
-//using CrudTest.Application.Commands;
 using Vehicle.Application.Features.Customers.Commands;
 using Vehicle.Domain.Entities.Concrete;
 using Vehicle.Application.Contracts.Persistence;
@@ -53,11 +49,11 @@ namespace CrudTest.Application.Handlers
             }
 
             // Uniqueness checks
-            if (await _context.CheckUniqueness(customer.FirstName, customer.LastName, customer.DateOfBirth))
+            if (!await _context.CheckUniqueness(customer.FirstName, customer.LastName, customer.DateOfBirth))
             {
                 throw new ValidationException("Customer already exists.");
             }
-            if (await _context.CheckUniquenessBYEmail(customer.Email))
+            if (!await _context.CheckUniquenessBYEmail(customer.Email))
             {
                 throw new ValidationException("Email already exists.");
             }

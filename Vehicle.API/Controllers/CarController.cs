@@ -22,7 +22,7 @@ namespace Vehicle.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<CarVM>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<CarVM>>> ListCarByColor(string carColor)
         {
-            var query = new ListCarByColorQuery(carColor);
+            var query = new ListCustomerQuery(carColor);
             var cars = await _mediator.Send(query);
             return Ok(cars);
         }

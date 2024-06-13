@@ -50,20 +50,15 @@ namespace CrudTest.Application.Handlers
                 throw new ValidationException("Invalid phone number");
             }
 
-            if (!await _context.CheckUniquenessBYEmail(request.Email))
+            if (request.Email != customerToUpdate.Email)
             {
-                throw new ValidationException("Email must be unique");
+                if (!await _context.CheckUniquenessBYEmail(request.Email))
+                {
+                    throw new ValidationException("Email must be unique");
+                }
             }
 
-            //without mapper:
-            //customer.FirstName = request.FirstName;
-            //customer.LastName = request.LastName;
-            //customer.DateOfBirth = request.DateOfBirth;
-            //customer.PhoneNumber = numberProto.NationalNumber.ToString();
-            //customer.Email = request.Email;
-            //customer.BankAccountNumber = request.BankAccountNumber;
-
-            //with automapper:
+            //with automapper automatically ignores not sent fields naturally
             _mapper.Map(request, customerToUpdate, typeof(UpdateCustomerCommand), typeof(Customer));
 
             await _context.UpdateAsync(customerToUpdate);
