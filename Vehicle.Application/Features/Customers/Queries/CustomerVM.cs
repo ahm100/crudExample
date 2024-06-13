@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Vehicle.Application.Features.Cars.Queries
+namespace Vehicle.Application.Features.Customers.Queries
 {
     public class CustomerVM
     {
