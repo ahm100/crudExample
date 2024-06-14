@@ -20,9 +20,7 @@ namespace Vehicle.Infrastructure
                 options.UseSqlServer(configuration.GetConnectionString("OrderingConnectionString")));
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
-            services.AddScoped<ICarRepository, CarRepository>();
-            services.AddScoped<IBusRepository, BusRepository>();
-            services.AddScoped<IBoatRepository, BoatRepository>();
+            
             services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 

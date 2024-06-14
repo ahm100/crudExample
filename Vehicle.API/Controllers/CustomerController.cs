@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Vehicle.Application.Features.Cars.Commands;
-using Vehicle.Application.Features.Cars.Queries;
 using Vehicle.Application.Features.Customers.Commands;
 using Vehicle.Application.Features.Customers.Queries;
 

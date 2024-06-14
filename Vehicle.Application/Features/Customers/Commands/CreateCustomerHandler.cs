@@ -5,7 +5,6 @@ using Vehicle.Application.Features.Customers.Commands;
 using Vehicle.Domain.Entities.Concrete;
 using Vehicle.Application.Contracts.Persistence;
 using Microsoft.Extensions.Logging;
-using Vehicle.Application.Features.Cars.Commands;
 
 namespace CrudTest.Application.Handlers
 {
