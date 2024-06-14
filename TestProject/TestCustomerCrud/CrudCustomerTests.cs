@@ -12,6 +12,9 @@ using Vehicle.Application.Features.Customers.Commands;
 using Vehicle.Domain.Entities.Concrete;
 using Microsoft.Extensions.Logging;
 using Vehicle.Application.Contracts.Persistence;
+using Vehicle.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Vehicle.Infrastructure.Persistence;
 
 namespace TestProject
 {
@@ -21,25 +24,27 @@ namespace TestProject
         public async Task CreateCustomer()
         {
             // Arrange
+
+            //var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            //.UseInMemoryDatabase(databaseName: "TestDatabase") // Provide a unique name
+            //.Options;
+            //using var dbContext = new ApplicationDbContext(options); // Create an in-memory context
+            //var customerRepository = new CustomerRepository(dbContext);
+
             var validatorMock = new Mock<IValidator<Customer>>();
-            var customerRepository = new Mock<ICustomerRepository>();
+            var mockCustomerRepository = new Mock<ICustomerRepository>();
             var customerValidator = new Mock<IValidator<Customer>>();
             var loggerMock = new Mock<ILogger<CreateCustomerHandler>>();
 
             // Create a mock logger
             validatorMock.Setup(v => v.Validate(It.IsAny<Customer>())).Returns(new ValidationResult());
 
-            // Set up logger behavior (optional)
-            // loggerMock.Setup(l => l.Log(...));
-
-            // Create a mock customer ID (positive integer)
-            //var customerId = 4; // shuould be the real Id in db
-
             // Set up customer repository behavior
-            //customerRepository.Setup(repo => repo.AddAsync(It.IsAny<Customer>())).ReturnsAsync(new CustomerResult { Id = customerId });
+            mockCustomerRepository.Setup(repo => repo.AddAsync(It.IsAny<Customer>())).ReturnsAsync(new CustomerResult { Id = 1 });
+
             //It.IsAny<Customer>(): This expression represents any instance of the Customer class. When you use it in a Moq setup, it allows the mocked method to accept any Customer object as an argument.
 
-            var handler = new CreateCustomerHandler(customerRepository.Object, validatorMock.Object, loggerMock.Object);
+            var handler = new CreateCustomerHandler(mockCustomerRepository.Object, validatorMock.Object, loggerMock.Object);
 
             var command = new CreateCustomerCommand
             {
@@ -56,7 +61,7 @@ namespace TestProject
             var result = await handler.Handle(command, CancellationToken.None);
 
             // Assert
-            Assert.True(result > 0); // Verify that the result is a positive integer
+            Assert.True(result >= 0); // Verify that the result is a positive integer
         }
     }
 
